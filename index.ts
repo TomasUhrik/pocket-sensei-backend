@@ -1,12 +1,19 @@
-const express = require('express');
+import express, { json } from 'express'
 const dotenv = require('dotenv');
+import cors from 'cors'
 import { NextFunction, Request, Response } from 'express'
 import { getCompletion } from './src/controllers/completion/completion';
+import bodyParser from 'body-parser';
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT;
+app.use(cors())
+app.use(json({ limit: '10mb' }))
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 app.get('/', (req: any, res: any) => {
   res.send('Express + TypeScript Server');
