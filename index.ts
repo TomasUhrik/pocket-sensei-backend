@@ -2,7 +2,7 @@ import express, { json } from 'express'
 const dotenv = require('dotenv');
 import cors from 'cors'
 import { NextFunction, Request, Response } from 'express'
-import { getCompletion } from './src/controllers/completion/completion';
+import { getCompletion, getCompletionJp } from './src/controllers/completion/completion';
 import bodyParser from 'body-parser';
 
 dotenv.config();
@@ -21,6 +21,10 @@ app.get('/', (req: any, res: any) => {
 
 app.post('/translate-with-explanation', (req: Request, res: Response, next: NextFunction) => {
   getCompletion(req, res, next)
+})
+
+app.post('/translate-with-explanation-jp', (req: Request, res: Response, next: NextFunction) => {
+  getCompletionJp(req, res, next)
 })
 
 app.listen(port, () => {
